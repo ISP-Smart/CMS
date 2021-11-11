@@ -42,6 +42,7 @@
 
 <script>
 export default {
+  title: "ISP Smart - Login",
   data() {
     return {
       isSubmited: false,
@@ -50,6 +51,11 @@ export default {
   methods: {
     subbmit() {
       this.isSubmited = true;
+      let that = this;
+      setTimeout(function () {
+        that.$vToastify.error("Login Timed out. Please try again.");
+        that.isSubmited = false;
+      }, 600);
     },
   },
 };
