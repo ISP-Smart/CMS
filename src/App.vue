@@ -1,32 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="!isLoggedIn" class="login">
+      <login />
     </div>
-    <router-view />
+    <div v-else class="page">
+      <navBar />
+      <div class="viewport">
+        <sideBar />
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
+<script>
+import navBar from "@/components/navBar.vue";
+import sideBar from "@/components/sideBar.vue";
+import login from "@/views/login.vue";
+export default {
+  components: {
+    navBar,
+    sideBar,
+    login,
+  },
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  // title: "this.pageTitle",
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import "@/assets/scss/main.scss";
+@import "@/assets/scss/forms.scss";
 </style>
